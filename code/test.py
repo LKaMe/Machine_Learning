@@ -1,4 +1,3 @@
 import numpy as np 
-student = np.dtype([('name','S20'),('age','i1'),('marks','f4')])
-print(student)
-# git测试
+a = np.logspace(0,9,10,base = 2)
+print(a)
