@@ -30,8 +30,8 @@ c.flat = [u + v for (u,v) in b]
 
 print('调用flat函数：')
 print(c)
-print('\n')
+# print('\n')
 #获得了和numpy内建的广播支持相同的结果
 
-print('x 与 y的和:')
-print(x + y)
+# print('x 与 y的和:')
+# print(x + y)D:\Lkm_Code\Machine_Learning
