@@ -1,4 +1,4 @@
-
+#!/usr/bin/python
 #coding=utf-8
 import numpy as np
 from scipy import stats
@@ -55,9 +55,3 @@ print ('intercept = ',intercept,' slope = ', slope)
 plt.plot(x, target_data, 'g*')
 plt.plot(x, theta[1] * x + theta[0], 'r')
 plt.show()
-
-
-#for i in range(nb_epochs): #nb_epochs为预先定义好的迭代次数
-#    params_grad = evaluate_gradient(loss_function,data,params) #
-#    params = params - learning_rate * params_grad 
-
