@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # 构造训练数据
 x = np.arange(0., 10., 0.2)
-m = len(x)  # 训练数据点数目
+m = len(x)  # 预先定义好的迭代次数
 print (m)
 x0 = np.full(m, 1.0)
 input_data = np.vstack([x0, x]).T  # 将偏置b作为权向量的第一个分量
@@ -20,7 +20,7 @@ epsilon = 1e-3
 np.random.seed(0)
 theta = np.random.randn(2)
 
-alpha = 0.001  # 步长(注意取值过大会导致振荡即不收敛,过小收敛速度变慢)
+eta = 0.001  # 步长(注意取值过大会导致振荡即不收敛,过小收敛速度变慢)
 diff = 0.
 error = np.zeros(2)
 count = 0  # 循环次数
@@ -34,10 +34,10 @@ while count < loop_max:
     sum_m = np.zeros(2)
     for i in range(m):
         dif = (np.dot(theta, input_data[i]) - target_data[i]) * input_data[i]
-        sum_m = sum_m + dif  # 当alpha取值过大时,sum_m会在迭代过程中会溢出
+        sum_m = sum_m + dif  # 当eta取值过大时,sum_m会在迭代过程中会溢出
     
-    theta = theta - alpha * sum_m  # 注意步长alpha的取值,过大会导致振荡
-    # theta = theta - 0.005 * sum_m      # alpha取0.005时产生振荡,需要将alpha调小
+    theta = theta - eta * sum_m  # 注意步长eta的取值,过大会导致振荡
+    # theta = theta - 0.005 * sum_m      # eta取0.005时产生振荡,需要将eta调小
 
     # 判断是否已收敛
     if np.linalg.norm(theta - error) < epsilon:
