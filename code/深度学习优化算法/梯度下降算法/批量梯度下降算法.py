@@ -52,7 +52,7 @@ print ('loop count = ',count, '\tw:',theta)
 slope, intercept, r_value, p_value, slope_std_error = stats.linregress(x, target_data)
 print ('intercept = ',intercept,' slope = ', slope)
 
-plt.plot(x, target_data, 'g*')
+plt.plot(x, target_data, 'ob')
 plt.plot(x, theta[1] * x + theta[0], 'r')
 plt.show()
 
