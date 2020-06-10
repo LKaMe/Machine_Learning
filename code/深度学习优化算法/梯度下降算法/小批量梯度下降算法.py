@@ -53,8 +53,10 @@ print ('loop count = ', count, '\tw:',theta)
 slope, intercept, r_value, p_value,slope_std_error = stats.linregress(x, target_data)
 print ('intercept = ',intercept,'slope = ', slope)
 
-plt.plot(x, target_data, 'g*')
+plt.plot(x, target_data, 'ob')
 plt.plot(x, theta[1]* x +theta[0],'r')
+plt.rcParams['font.sans-serif'] = 'SimHei'#用于正常显示中文
+plt.title('小批量梯度下降算法')
 plt.show()
 
 # for i in range(nb_epochs):

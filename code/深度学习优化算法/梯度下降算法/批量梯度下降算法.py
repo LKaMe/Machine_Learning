@@ -40,7 +40,7 @@ while count < loop_max:
     # theta = theta - 0.005 * sum_m      # eta取0.005时产生振荡,需要将eta调小
 
     # 判断是否已收敛
-    if np.linalg.norm(theta - error) < epsilon:
+    if np.linalg.norm(theta - error) < epsilon:#np.linalg.norm求范数
         finish = 1
         break
     else:
@@ -54,6 +54,8 @@ print ('intercept = ',intercept,' slope = ', slope)
 
 plt.plot(x, target_data, 'ob')
 plt.plot(x, theta[1] * x + theta[0], 'r')
+plt.rcParams['font.sans-serif'] = 'SimHei' #用于正常显示中文
+plt.title('批量梯度下降算法')#添加标题
 plt.show()
 
 
