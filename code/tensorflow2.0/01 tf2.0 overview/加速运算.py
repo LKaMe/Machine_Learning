@@ -23,3 +23,11 @@ def gpu_run():#gpu运算函数
         c = tf.matmul(gpu_a,gpu_b)
     return c
 
+#第一次计算需要热身，避免将初始化时间结算在内
+cpu_time = timeit.timeit(cpu_run,number=10)
+gpu_time = timeit.timeit(gpu_run,number=10)
+print('warmup:',cpu_time,gpu_time)
+#正式计算10次，取平均时间
+cpu_time = timeit.timeit(cpu_run,number=10)
+gpu_time = timeit.timeit(gpu_run,number=10)
+print('run time:',cpu_time,gpu_time)
