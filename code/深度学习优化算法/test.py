@@ -59,3 +59,13 @@ plt.plot(X,optimal[0]+optimal[1]*X)
 plt.scatter(X1,y)
 plt.show()
 
+def mse(b,w,points):
+    #根据当前的w,b参数计算均方差损失
+    totalError = 0
+    for i in range(0,len(points)):#循环迭代所有点
+        x = points[i,0]#获得i号点的输入x
+        y = points[i,1]#获得i号点的输出y
+        #计算差的平方，并累加
+        totalError += (y - (w * x + b)) ** 2
+    #将累加的误差求平均，得到均方差
+    return totalError/float(len(points))
