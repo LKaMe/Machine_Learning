@@ -10,7 +10,7 @@ imgs = []
 
 def searchImage(text):
     print('收到关键词: ', text)
-    for name in glob.glob('F:/python/表情包/*'+text+'*.jpg'):
+    for name in glob.glob('E:/python/表情包/*'+text+'*.jpg'):
         imgs.append(name)
 
 

@@ -13,7 +13,7 @@ class DownloadBiaoqingbao(Thread):
     def __init__(self, queue, path):
         Thread.__init__(self)
         self.queue = queue
-        self.path = 'F:/python/表情包/'
+        self.path = 'E:/python/表情包/'
         if not os.path.exists(path):
             os.makedirs(path)
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     urls = [_url.format(page=page) for page in range(1, 4328+1)]
 
     queue = Queue()
-    path = 'F:/python/表情包/'
+    path = 'E:/python/表情包/'
 
     # 创建线程
     for x in range(10):
