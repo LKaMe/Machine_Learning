@@ -154,4 +154,134 @@ fc.kernel #查看权值矩阵W
 
 
 
+#三维张量
+#自动加载IMDB电影评价数据集
+(x_train,y_train),(x_test,y_test) = keras.datasets.imdb.load_data(num_words = 10000)
+#将句子填充，截断为等长80个单词的句子
+x_train = keras.preprocessing.sequence.pad_sequences(x_train,maxlen = 80)
+x_train.shape
+#创建词向量Embedding层类
+embedding = layers.Embedding(10000,100)
+#将数字编码的单词转换为词向量
+out = embedding(x_train)
+out.shape
+
+
+
+#四维张量
+#创建32*32的彩色图片输入，个数为4
+x = tf.random.normal([4,32,32,3])
+#创建卷积神经网络
+layers = layers.Conv2D(16,kernel_size = 3)
+out = layer(x)#前向计算
+out.shape#输出大小
+
+
+
+
+#索引
+x = tf.random.normal([4,32,32,3])#创建4D张量
+
+
+#切片
+x = tf.range(9)#创建0~9向量
+x[8:0:-1]#从8取到0，逆序，不包含0
+x[::-1]#逆序全部元素
+x[::-2]#逆序间隔采样
+x = tf.random.normal([4,32,32,3])
+x[0,::-2,::-2]#行，列逆序间隔采样
+x[:,:,:,1]#取G通道数据
+x[0:2,...,1:]#读取第1~2张图片的G/B通道数据，高宽维度全部采集
+x[2:,...]#高、宽、通道维度全部采集，等价于x[2:]
+x[...,:2]#所有样本，所有高、宽的前2个通道
+x = tf.range(96)#生成向量
+x = tf.reshape(x,[2,4,4,3])#改变x的视图，获得4D张量，存储并未改变
+x,ndim,x.shape#获取张量的维度数和形状列表
+tf.reshape(x,[2,-1])
+tf.reshape(x,[2,4,12])
+tf.reshape(x,[2,-1,3])
+
+
+#增删维度
+#产生矩阵
+x = tf.random.uniform([28,28],maxval = 10,dtype = tf.int32)
+x = tf.expand_dims(x,axis = 2)#axis = 2表示宽维度后面的一个维度
+x = tf.expand_dims(x,axis = 0)#高维度之前插入新维度
+x = tf.squeeze(x,axis = 0)#删除图片数量维度
+x = tf.squeeze(x,axis = 2)#删除图片通道数维度
+x = tf.random.uniform([1,28,28,1],maxval = 10,dtype = int32)
+tf.squeeze(x)#删除所有长度为1的维度
+
+
+
+#交换维度
+x = tf.random.normal([2,32,32,3])
+tf.transpose(x,perm = [0,3,1,2])#交换维度
+x = tf.random.normal([2,32,32,3])
+tf.transpose(x,perm = [0,2,1,3])#交换维度
+
+b = tf.constant([1,2])#创建向量b
+b = tf.expand_dims(b,axis = 0)#插入新维度，变成矩阵
+b = tf.tile(b,multiples = [2,1])#样本维度上复制一份
+x = tf.range(4)
+x = tf.reshape(x,[2,2])#创建2行2列矩阵
+x = tf.tile(x,multiples = [1,2])#列维度复制一份
+x = tf.tile(x,multiples = [2,1])#行维度复制一份
+
+
+x = tf.random.normal([2,4])
+w = tf.random.normal([4,3])
+b = tf.random.normal([3])
+y = x@w + b #不同shape的张量直接相加
+y = x@w + tf.broadcast_to(b,[2,3])#手动扩展，并相加
+
+
+A = tf.random.normal([32,1])#创建矩阵
+tf.broadcast_to(A,[2,32,32,3])#扩展为4D张量
+
+A = tf.random.normal([32,2])
+tf.broadcast_to(A,[2,32,32,4])#不符合Broadcasting条件
+
+a = tf.random.normal([2,32,32,1])
+b = tf.random.normal([32,32])
+a+b,a-b,a*b,a/b #测试加减乘除的Brocastcasting机制
+
+
+#加减乘除运算
+a = tf.range(5)
+b = tf.constant(2)
+a//b #整除运算
+a%b #余除运算
+#乘方运算
+x = tf.range(4)
+tf.pow(x,3)#乘方运算
+x ** 2#乘方运算符
+
+x = tf.constant([1.,4.,9.])
+x ** (0.5)#平方根
+x = tf.square(x)#平方
+tf.sqrt(x)#平方根
+
+
+
+#指数和对数运算
+x = tf.constant([1.,2.,3.])
+2 ** x#指数运算
+tf.exp(1.)#自然指数运算
+x = tf.exp(3.)
+tf.math.log(x)#对数运算
+
+
+x = tf.constant([1.,2.])
+x = 10 ** x 
+tf.math.log(x)/tf.math.log(10.)#换底公式
+
+
+a = tf.random.normal([4,3,28,32])
+b = tf.random.normal([4,3,32,2])
+a@b #批量形式的矩阵相乘
+
+a = tf.random.normal([4,28,32])
+b = tf.random.normal([32,16])
+tf.matmul(a,b)#先自动扩展，再矩阵相乘
 
