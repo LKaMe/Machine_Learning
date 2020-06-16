@@ -20,3 +20,6 @@ print(x_train.shape,x_test.shape)#打印等长的句子张量形状
 x = tf.random.normal([4,28,28,1])
 #图片上下、左右各填充2个单元
 tf.pad(x,[[0,0],[2,2],[2,2],[0,0]])
+
+x = tf.random.normal([4,32,32,3])
+tf.tile(x,[2,3,3,1])#数据复制
