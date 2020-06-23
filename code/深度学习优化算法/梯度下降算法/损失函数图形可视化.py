@@ -3,7 +3,6 @@ from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import numpy as np
 
-plt.rcParams['axes.unicode_minus'] = False ## 设置正常显示符号,主要是负号的显示
 
 a=np.arange(-1,3,0.1)
 N=a.size
@@ -38,7 +37,8 @@ fig = plt.figure()
 ax = Axes3D(fig)
 ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap='rainbow', edgecolor='none')#彩虹色图片
 plt.rcParams['font.sans-serif'] = 'SimHei' #用于正常显示中文
-plt.title('损失函数')#添加标题
+plt.rcParams['axes.unicode_minus'] = False ## 设置正常显示符号,主要是负号的显示
+plt.title('View of Loss Function')#添加标题
 #ax = Axes3D(fig)
 # plt.rcParams['font.sans-serif'] = 'SimHei' #用于正常显示中文
 # plt.title('损失函数图形')#添加标题

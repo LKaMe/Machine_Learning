@@ -56,7 +56,7 @@ print ('intercept = ',intercept,'slope = ',slope)
 plt.plot(x, target_data, 'ob')
 plt.plot(x, theta[1] * x + theta[0], 'r')
 plt.rcParams['font.sans-serif'] = 'SimHei' #用于正常显示中文
-plt.title('随机梯度下降算法')
+plt.title('Stochastic Gradient Descent')
 plt.show()
 
 # import numpy as np 
