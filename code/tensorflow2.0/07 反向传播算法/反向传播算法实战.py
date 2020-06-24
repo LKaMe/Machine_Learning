@@ -143,4 +143,30 @@ def backpropagation(self,X,y,learning_rate):
             layer.error = np.dot(next_layer.weights,next_layer.delta)
             #关键步骤：计算隐藏层的delta,参考隐藏层的梯度公式
             layer.delta = layer.error*layer.apply_activation_derivative(layer.last_activation)
-            
+    #循环更新权值
+    for i in range(len(self._layers)):
+        layer = self._layers[i]        
+        #o_i为上一网络层的输出
+        o_i = np.atleast_2d(X if i == 0 else self._layers[i - 1].last_activation)
+        #梯度下降算法，delta是公式中的复数，故这里用加号
+        layer.weights += layer.delta * o_i.T * learning_rate 
+
+    #网络训练
+    def train(self,X_train,X_test,y_test,learning_rate,max_epochs):
+        #网络训练函数
+        #one-hot编码
+        y_onehot = np.zeros((y_train.shape[0],2))
+        y_onehot[np.arange(y_train.shape[0]),y_train] = 1
+        mses = []
+        for i in range(max_epochs):#训练1000个epoch
+            for j in range(len(X_train)):#一次训练一个样本
+                self.backpropagation(X_train[j],y_onehot[j],learning_rate)
+            if i % 10 == 0:
+                #打印出MSE Loss 
+                mse = np.mean(np.square(y_onehot - self.feed_forword(X_train)))
+                mses.append(mse)
+                print('Epoch:#%s,MSE:%f' % (i,float(mse)))
+
+                #统计并打印准确率
+                print('Accuracy:%.2f%%' % (self.accuracy(self.predict(X_test),y_test.flatten()) * 100))
+        return mses 
