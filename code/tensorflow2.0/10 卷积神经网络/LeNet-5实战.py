@@ -56,3 +56,38 @@ for x,y in db_test:#遍历所有训练样本
     total += x.shape[0]
 #计算准确率
 print('test acc:',correct/total)
+
+
+#BN层实现
+#创建BN层
+layer = layers.BatchNormalization()
+network = Sequential([#网络容器
+    layers.Conv2D(6,kernel_size = 3,strides = 1),
+    #插入BN层
+    layers.BatchNormalization(),
+    layers.MaxPooling2D(pooling_size = 2,strides = 2),
+    layers.ReLU(),
+    layers.Conv2D(16,kernel_size = 3,strides = 1),
+    #插入BN层
+    layers.BatchNormalization(),
+    layers.MaxPooling2D(pool_size = 2,strides = 2),
+    layers.ReLU(),
+    layers.Flatten(),
+    layers.Dense(120,activation='relu'),
+    #此处也可以插入BN层
+    layers.Dense(84,activation='relu'),
+    #此处也可以插入BN层
+    layers.Dense(10)
+])
+
+with tf.GradientTape() as tape:
+    #插入通道维度
+    x = tf.expand_dims(x,axis = 3)
+    #前向计算，设置计算模式，[b,784] => [b,10]
+    out = network(x,training=True)
+
+    for x,y in db_test:#遍历测试集
+        #插入通道维度
+        x = tf.expand_dims(x,axis = 3)
+        #前向计算，测试模式
+        out = network(x,trainging=False)
