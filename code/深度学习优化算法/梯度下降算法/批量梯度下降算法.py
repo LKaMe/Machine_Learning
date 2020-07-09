@@ -45,12 +45,12 @@ while count < loop_max:
         break
     else:
         error = theta
-    print ('loop count = ',count, '\tw:',theta)
-print ('loop count = ',count, '\tw:',theta)
+    print ('loop count = ',count, '\t参数:',theta)
+print ('loop count = ',count, '\t参数:',theta)
 
-# check with scipy linear regression
+# check with scipy linear regression 线性拟合
 slope, intercept, r_value, p_value, slope_std_error = stats.linregress(x, target_data)
-print ('intercept = ',intercept,' slope = ', slope)
+print ('intercept = ',intercept,' slope = ', slope)#intercept截距，slope斜率
 
 plt.plot(x, target_data, 'ob')
 plt.plot(x, theta[1] * x + theta[0], 'r')
