@@ -34,7 +34,8 @@ def train(eta,epoch,theta1,theta2,up,dirc):
     fig =plt.figure()
     ax = Axes3D(fig)
 
-    ax.contour3D(X, Y, Z, 50, cmap='binary')#等高线图
+    # ax.contour3D(X, Y, Z, 50, cmap='binary')#等高线图
+    ax.contour3D(X,Y,Z,50,cmap='rainbow')#彩色
     ax.scatter3D(t1, t2, ff(t1,t2), c='r',marker = 'o')
     ax.view_init(up, dirc)
     plt.rcParams['font.sans-serif'] = 'SimHei'#用于显示中文
